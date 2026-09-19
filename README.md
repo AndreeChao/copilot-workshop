@@ -1,4 +1,8 @@
+[作品集說明](./PORTFOLIO.md)
+
 # GitHub Copilot 實戰工作坊:Agent Mode × MCP × Agentic Workflows
+
+![工作坊完成徽章](https://img.shields.io/badge/GitHub_Copilot_實戰工作坊-已完成-1F883D?style=for-the-badge&logo=githubcopilot&logoColor=white)
 
 <img src="https://octodex.github.com/images/Professortocat_v2.png" align="right" height="200px" />
 
