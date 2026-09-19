@@ -39,7 +39,17 @@
         <p id="empty-state" class="empty-state">還沒有任何待辦事項,新增一個吧!</p>
 
         <footer class="todo-footer">
-          <span>未完成: <strong id="pending-count">0</strong> 項</span>
+          <div class="todo-footer-row">
+            <span>未完成: <strong id="pending-count">0</strong> 項</span>
+            <button
+              id="clear-completed-btn"
+              class="clear-completed-btn"
+              type="button"
+              aria-label="清除所有已完成事項"
+            >
+              清除已完成
+            </button>
+          </div>
         </footer>
       </section>
     </main>

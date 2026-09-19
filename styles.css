@@ -257,7 +257,38 @@ input {
   border-top: 1px solid var(--border-color);
   color: var(--text-color);
   font-size: 0.98rem;
-  text-align: center;
+}
+
+.todo-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.clear-completed-btn {
+  border: none;
+  border-radius: 10px;
+  background: var(--danger-soft);
+  color: var(--danger-color);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.clear-completed-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.clear-completed-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.clear-completed-btn[hidden] {
+  display: none;
 }
 
 @media (max-width: 480px) {

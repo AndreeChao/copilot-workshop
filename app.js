@@ -6,6 +6,7 @@ const todoInput = document.getElementById('todo-input');
 const todoList = document.getElementById('todo-list');
 const emptyState = document.getElementById('empty-state');
 const pendingCount = document.getElementById('pending-count');
+const clearCompletedBtn = document.getElementById('clear-completed-btn');
 const themeToggle = document.getElementById('theme-toggle');
 const themeIcon = document.getElementById('theme-icon');
 const themeLabel = document.getElementById('theme-label');
@@ -72,6 +73,15 @@ function updatePendingCount() {
   pendingCount.textContent = remainingCount;
 }
 
+function updateClearCompletedButton() {
+  const completedCount = todos.filter((todo) => todo.completed).length;
+  const shouldShowButton = completedCount > 0;
+
+  clearCompletedBtn.hidden = !shouldShowButton;
+  clearCompletedBtn.disabled = !shouldShowButton;
+  clearCompletedBtn.setAttribute('aria-disabled', String(!shouldShowButton));
+}
+
 function getEmptyMessage() {
   if (todos.length === 0) {
     return '還沒有任何待辦事項,新增一個吧!';
@@ -108,6 +118,7 @@ function renderTodos() {
     emptyState.textContent = getEmptyMessage();
     emptyState.hidden = false;
     updatePendingCount();
+    updateClearCompletedButton();
     updateFilterButtons();
     return;
   }
@@ -148,6 +159,7 @@ function renderTodos() {
   });
 
   updatePendingCount();
+  updateClearCompletedButton();
   updateFilterButtons();
 }
 
@@ -193,6 +205,24 @@ function removeTodo(id) {
   renderTodos();
 }
 
+function clearCompletedTodos() {
+  const completedCount = todos.filter((todo) => todo.completed).length;
+
+  if (completedCount === 0) {
+    return;
+  }
+
+  const confirmed = window.confirm(`確定要刪除 ${completedCount} 個已完成項目嗎？`);
+
+  if (!confirmed) {
+    return;
+  }
+
+  todos = todos.filter((todo) => !todo.completed);
+  saveTodos();
+  renderTodos();
+}
+
 // 提交表單時，避免新增空白內容，並保留輸入框焦點方便連續新增。
 todoForm.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -214,6 +244,10 @@ filterButtons.forEach((button) => {
     currentFilter = button.dataset.filter;
     renderTodos();
   });
+});
+
+clearCompletedBtn.addEventListener('click', () => {
+  clearCompletedTodos();
 });
 
 applyTheme(getDefaultTheme());
