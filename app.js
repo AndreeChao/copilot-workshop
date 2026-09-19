@@ -1,5 +1,6 @@
 const STORAGE_KEY = 'todo-list-items';
 const THEME_KEY = 'todo-theme';
+const FILTER_KEY = 'todo-filter';
 
 const todoForm = document.getElementById('todo-form');
 const todoInput = document.getElementById('todo-input');
@@ -14,7 +15,29 @@ const filterButtons = document.querySelectorAll('.filter-btn');
 
 // 讀取 localStorage 中的待辦資料；若資料格式不正確，回退成空陣列。
 let todos = loadTodos();
-let currentFilter = 'all';
+let currentFilter = loadFilter();
+
+function loadFilter() {
+  try {
+    const savedFilter = localStorage.getItem(FILTER_KEY);
+
+    if (savedFilter === 'all' || savedFilter === 'active' || savedFilter === 'completed') {
+      return savedFilter;
+    }
+  } catch (error) {
+    console.error('讀取篩選狀態失敗:', error);
+  }
+
+  return 'all';
+}
+
+function saveFilter(filter) {
+  try {
+    localStorage.setItem(FILTER_KEY, filter);
+  } catch (error) {
+    console.error('儲存篩選狀態失敗:', error);
+  }
+}
 
 function loadTodos() {
   try {
@@ -242,6 +265,7 @@ themeToggle.addEventListener('click', () => {
 filterButtons.forEach((button) => {
   button.addEventListener('click', () => {
     currentFilter = button.dataset.filter;
+    saveFilter(currentFilter);
     renderTodos();
   });
 });
