@@ -78,14 +78,14 @@ function getEmptyMessage() {
   }
 
   if (currentFilter === 'active') {
-    return '目前沒有未完成的待辦事項';
+    return '目前沒有未完成的待辦事項。這是篩選結果，不是刪除；切回「全部」即可查看所有項目。';
   }
 
   if (currentFilter === 'completed') {
-    return '目前沒有已完成的待辦事項';
+    return '目前沒有已完成的待辦事項。這是篩選結果，不是刪除；切回「全部」即可查看所有項目。';
   }
 
-  return '沒有符合條件的待辦事項';
+  return '沒有符合條件的待辦事項。這是篩選結果，不是刪除。';
 }
 
 function getVisibleTodos() {
