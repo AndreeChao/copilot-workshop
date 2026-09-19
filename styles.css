@@ -249,6 +249,7 @@ input {
   text-align: center;
   color: var(--muted-color);
   background: var(--surface-alt);
+  line-height: 1.6;
 }
 
 .todo-footer {
